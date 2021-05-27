@@ -1,4 +1,3 @@
-TODO 1. Implement Splash screen for both android and ios
 TODO 2. Create Login page and register page UI
 TODO 3. Complete Login page and register page functionality
 TODO 4. Add functionality to login and register page
