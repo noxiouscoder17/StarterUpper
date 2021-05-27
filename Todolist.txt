@@ -1,0 +1,11 @@
+TODO 1. Implement Splash screen for both android and ios
+TODO 2. Create Login page and register page UI
+TODO 3. Complete Login page and register page functionality
+TODO 4. Add functionality to login and register page
+TODO 5. Add forgot password page and add reset with email functionality
+TODO 6. Create user initial company registration and functionality
+TODO 7. Upload the data through code to the Realtime database firebase
+TODO 8. Create Main Page of the App which would display user info and other navigation options
+TODO 9. Add functionality to the Main Page UI
+TODO 10. Create Employee Page
+TODO 11. Create Employee classes and add employee functionality
