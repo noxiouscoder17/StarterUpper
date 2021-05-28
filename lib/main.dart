@@ -41,8 +41,19 @@ class _StarterUpperState extends State<StarterUpper> {
                     ),
                   ),
                 ),
+                Center(
+                  child: Text(
+                    'Made by IKAYI',
+                    style: TextStyle(
+                      fontFamily: 'ShadowsIntoLight',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 90, 115, 156),
+                    ),
+                  ),
+                ),
                 SizedBox(
-                  height: 80.0,
+                  height: 60.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
