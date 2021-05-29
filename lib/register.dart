@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starter_upper/login.dart';
 
 class RegisterPage extends StatefulWidget {
+  static const String id = 'RegisterPage';
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -55,7 +57,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          Navigator.pushNamed(context, LoginPage.id);
+                        });
+                      },
                       child: Text(
                         'Login',
                         style: TextStyle(
@@ -95,7 +101,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           width: 300,
                           height: 65,
                           child: TextFormField(
-                            autofocus: true,
                             maxLines: 1,
                             textDirection: TextDirection.ltr,
                             decoration: InputDecoration(
@@ -122,7 +127,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 65,
                           child: TextFormField(
                             obscureText: true,
-                            autofocus: true,
                             maxLines: 1,
                             textDirection: TextDirection.ltr,
                             decoration: InputDecoration(
@@ -149,7 +153,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 65,
                           child: TextFormField(
                             obscureText: true,
-                            autofocus: true,
                             maxLines: 1,
                             textDirection: TextDirection.ltr,
                             decoration: InputDecoration(

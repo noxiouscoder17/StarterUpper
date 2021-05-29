@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starter_upper/register.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String id = 'loginPage';
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -70,7 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(width: 5),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          Navigator.pushNamed(context, RegisterPage.id);
+                        });
+                      },
                       child: Text(
                         'Register',
                         style: TextStyle(
@@ -95,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                           width: 300,
                           height: 65,
                           child: TextFormField(
-                            autofocus: true,
                             maxLines: 1,
                             textDirection: TextDirection.ltr,
                             decoration: InputDecoration(
@@ -121,7 +126,6 @@ class _LoginPageState extends State<LoginPage> {
                           width: 300,
                           height: 60,
                           child: TextFormField(
-                            autofocus: true,
                             obscureText: true,
                             maxLines: 1,
                             textDirection: TextDirection.ltr,
