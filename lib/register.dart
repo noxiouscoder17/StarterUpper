@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(StarterUpper());
-}
-
-class StarterUpper extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _StarterUpperState createState() => _StarterUpperState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _StarterUpperState extends State<StarterUpper> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
