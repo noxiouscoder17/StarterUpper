@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:starter_upper/login.dart';
-import 'package:starter_upper/register.dart';
+import 'package:starter_upper/signin_signup.dart';
 
 void main() {
   runApp(StarterUpper());
@@ -20,11 +17,11 @@ class _StarterUpperState extends State<StarterUpper> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LoginPage.id,
+      initialRoute: SigninPage.id,
       routes: {
-        LoginPage.id: (context) => LoginPage(),
-        RegisterPage.id: (context) => RegisterPage(),
+        SigninPage.id: (context) => SigninPage(),
       },
+      //Navigator.pushNamed(context, RegisterPage.id); to navigate through pages
     );
   }
 }
