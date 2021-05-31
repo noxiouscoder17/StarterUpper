@@ -189,6 +189,7 @@ class _SigninPageState extends State<SigninPage> {
                 ElevatedButton(
                   onPressed: () {
                     _formKey.currentState.save();
+                    _validateSignIn(_email, _password);
                     print(_email);
                     print(_password);
                   },
@@ -325,7 +326,7 @@ class _SigninPageState extends State<SigninPage> {
             ),
           ),
         ),
-      );
+      ); //RegistrationPage Form
     }
   }
 
@@ -336,18 +337,92 @@ class _SigninPageState extends State<SigninPage> {
           final newUser = await _auth.createUserWithEmailAndPassword(
               email: email, password: password);
           if (newUser != null) {
-            Navigator.pushNamed(context, HomePage.id);
+            User user = FirebaseAuth.instance.currentUser;
+            user.sendEmailVerification();
+            if (user.emailVerified) {
+              Navigator.pushNamed(context, HomePage.id);
+            } else {
+              Alert(
+                  context: context,
+                  title: 'Need Verification',
+                  desc: 'Check your email to verify your email id',
+                  buttons: [
+                    DialogButton(
+                      child: Text('Okay'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: MyColors().darkLavender,
+                    ),
+                  ]).show();
+            }
           }
         } catch (e) {
-          Alert(context: context, title: e.code, desc: e.message).show();
+          Alert(context: context, title: e.code, desc: e.message, buttons: [
+            DialogButton(
+              child: Text('Okay'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              color: MyColors().darkLavender,
+            )
+          ]).show();
           print('Error Code: ${e.code}');
         }
       } else {
         Alert(
-          context: context,
-          title: 'Registration Error',
-          desc: 'Password and Confirm Password do not match',
-        ).show();
+            context: context,
+            title: 'Registration Error',
+            desc: 'Password and Confirm Password do not match',
+            buttons: [
+              DialogButton(
+                child: Text('Okay'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: MyColors().darkLavender,
+              ),
+            ]).show();
+      }
+    });
+  }
+
+  void _validateSignIn(String email, String password) {
+    setState(() async {
+      try {
+        final newUser = await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        if (newUser != null) {
+          User user = FirebaseAuth.instance.currentUser;
+          if (user.emailVerified) {
+            Navigator.pushNamed(context, HomePage.id);
+          } else {
+            Alert(
+                context: context,
+                title: 'Need Verification',
+                desc: 'Check your email to verify your email id',
+                buttons: [
+                  DialogButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: MyColors().darkLavender,
+                  ),
+                ]).show();
+          }
+        }
+      } catch (e) {
+        Alert(context: context, title: e.code, desc: e.message, buttons: [
+          DialogButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            color: MyColors().darkLavender,
+          )
+        ]).show();
+        print('Error Code: ${e.code}');
       }
     });
   }
