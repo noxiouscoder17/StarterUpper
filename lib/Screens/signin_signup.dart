@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:starter_upper/Personalization/appcolors.dart';
 import 'package:starter_upper/Screens/homepage.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:starter_upper/Screens/forgetpassword.dart';
 
 class SigninPage extends StatefulWidget {
   static const String id = 'signinPage';
@@ -14,7 +16,7 @@ class SigninPage extends StatefulWidget {
 
 class _SigninPageState extends State<SigninPage> {
   Form currentForm;
-  bool loginFlag = false;
+  bool loginFlag = true;
   final _formKey = GlobalKey<FormState>();
   String _email, _password, _confirmPassword;
   final _auth = FirebaseAuth.instance;
@@ -174,7 +176,11 @@ class _SigninPageState extends State<SigninPage> {
                 Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        Navigator.pushNamed(context, ForgotPasswordPage.id);
+                      });
+                    },
                     child: Text(
                       'Forget password',
                       style: TextStyle(
@@ -207,7 +213,10 @@ class _SigninPageState extends State<SigninPage> {
                       onPrimary: MyColors().lightLavender),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    signInWithGoogle();
+                    Navigator.pushNamed(context, HomePage.id);
+                  },
                   child: Text(
                     'Sign in with Google',
                     style: TextStyle(
@@ -425,5 +434,23 @@ class _SigninPageState extends State<SigninPage> {
         print('Error Code: ${e.code}');
       }
     });
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

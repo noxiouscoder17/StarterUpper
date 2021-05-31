@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:starter_upper/Screens/signin_signup.dart';
 import 'package:starter_upper/Screens/homepage.dart';
+import 'package:starter_upper/Screens/forgetpassword.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class _StarterUpperState extends State<StarterUpper> {
       routes: {
         SigninPage.id: (context) => SigninPage(),
         HomePage.id: (context) => HomePage(),
+        ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
       },
       //Navigator.pushNamed(context, RegisterPage.id); to navigate through pages
     );
