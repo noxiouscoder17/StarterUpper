@@ -7,6 +7,7 @@ import 'package:starter_upper/Screens/homepage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(StarterUpper());
 }
 

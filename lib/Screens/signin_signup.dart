@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:starter_upper/Personalization/appcolors.dart';
+import 'package:starter_upper/Screens/homepage.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SigninPage extends StatefulWidget {
   static const String id = 'signinPage';
@@ -13,6 +17,7 @@ class _SigninPageState extends State<SigninPage> {
   bool loginFlag = false;
   final _formKey = GlobalKey<FormState>();
   String _email, _password, _confirmPassword;
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class _SigninPageState extends State<SigninPage> {
                   image: AssetImage('images/logoshort.jpeg'),
                   width: 100.0,
                   height: 100.0,
-                ),
+                ), //Logo
                 Text(
                   'STARTER UPPER',
                   textAlign: TextAlign.center,
@@ -42,7 +47,7 @@ class _SigninPageState extends State<SigninPage> {
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
                       color: MyColors().darkLavender),
-                ),
+                ), //ProductName
                 Text(
                   'Made by IKAYI',
                   textAlign: TextAlign.center,
@@ -51,7 +56,7 @@ class _SigninPageState extends State<SigninPage> {
                       fontWeight: FontWeight.bold,
                       fontFamily: 'ShadowsIntoLight',
                       color: MyColors().darkLavender),
-                ),
+                ), //Company Name
                 SizedBox(
                   height: 10,
                 ),
@@ -100,7 +105,7 @@ class _SigninPageState extends State<SigninPage> {
                           onPrimary: MyColors().lightLavender),
                     )
                   ],
-                ),
+                ), //Login Register Page Toggle
                 Center(
                   child: currentForm = getForm(),
                 ),
@@ -220,7 +225,7 @@ class _SigninPageState extends State<SigninPage> {
           ),
         ),
       );
-    } else {
+    } /* Sign In Page form*/ else {
       return Form(
         key: _formKey,
         child: Align(
@@ -295,8 +300,10 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     _formKey.currentState.save();
+                    await _validateRegistration(
+                        _email, _password, _confirmPassword);
                     print(_email);
                     print(_password);
                     print(_confirmPassword);
@@ -320,5 +327,28 @@ class _SigninPageState extends State<SigninPage> {
         ),
       );
     }
+  }
+
+  void _validateRegistration(email, password, cpassword) {
+    setState(() async {
+      if (password == cpassword) {
+        try {
+          final newUser = await _auth.createUserWithEmailAndPassword(
+              email: email, password: password);
+          if (newUser != null) {
+            Navigator.pushNamed(context, HomePage.id);
+          }
+        } catch (e) {
+          Alert(context: context, title: e.code, desc: e.message).show();
+          print('Error Code: ${e.code}');
+        }
+      } else {
+        Alert(
+          context: context,
+          title: 'Registration Error',
+          desc: 'Password and Confirm Password do not match',
+        ).show();
+      }
+    });
   }
 }
