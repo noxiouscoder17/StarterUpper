@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "563351061198",
+    "project_id": "starterupper-c3dc7",
+    "storage_bucket": "starterupper-c3dc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563351061198:android:814b1abe716264dcad069f",
+        "android_client_info": {
+          "package_name": "com.ikayi.starter_upper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563351061198-hu81rhp2n0ilu612m97fo80cmdbmikit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdd5nkdCqkd5RXxzRQd46W_Vf3mCH3Hqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563351061198-hu81rhp2n0ilu612m97fo80cmdbmikit.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:starter_upper/appcolors.dart';
+import 'package:starter_upper/Personalization/appcolors.dart';
 
 class SigninPage extends StatefulWidget {
   static const String id = 'signinPage';
@@ -10,7 +10,10 @@ class SigninPage extends StatefulWidget {
 
 class _SigninPageState extends State<SigninPage> {
   Form currentForm;
-  bool loginFlag = true;
+  bool loginFlag = false;
+  final _formKey = GlobalKey<FormState>();
+  String _email, _password, _confirmPassword;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -112,6 +115,7 @@ class _SigninPageState extends State<SigninPage> {
   Form getForm() {
     if (loginFlag == true) {
       return Form(
+        key: _formKey,
         child: Align(
           heightFactor: 1.3,
           alignment: Alignment.center,
@@ -122,6 +126,9 @@ class _SigninPageState extends State<SigninPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextFormField(
+                  onSaved: (emailValue) {
+                    _email = emailValue;
+                  },
                   maxLines: 1,
                   textDirection: TextDirection.ltr,
                   decoration: InputDecoration(
@@ -139,6 +146,10 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                 ),
                 TextFormField(
+                  obscureText: true,
+                  onSaved: (passwordValue) {
+                    _password = passwordValue;
+                  },
                   maxLines: 1,
                   textDirection: TextDirection.ltr,
                   decoration: InputDecoration(
@@ -171,7 +182,11 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _formKey.currentState.save();
+                    print(_email);
+                    print(_password);
+                  },
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -207,6 +222,7 @@ class _SigninPageState extends State<SigninPage> {
       );
     } else {
       return Form(
+        key: _formKey,
         child: Align(
           heightFactor: 1.3,
           alignment: Alignment.center,
@@ -217,6 +233,9 @@ class _SigninPageState extends State<SigninPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextFormField(
+                  onSaved: (emailValue) {
+                    _email = emailValue;
+                  },
                   maxLines: 1,
                   textDirection: TextDirection.ltr,
                   decoration: InputDecoration(
@@ -234,6 +253,10 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                 ),
                 TextFormField(
+                  onSaved: (passwordValue) {
+                    _password = passwordValue;
+                  },
+                  obscureText: true,
                   maxLines: 1,
                   textDirection: TextDirection.ltr,
                   decoration: InputDecoration(
@@ -251,6 +274,10 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                 ),
                 TextFormField(
+                  onSaved: (cpassValue) {
+                    _confirmPassword = cpassValue;
+                  },
+                  obscureText: true,
                   maxLines: 1,
                   textDirection: TextDirection.ltr,
                   decoration: InputDecoration(
@@ -268,7 +295,12 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _formKey.currentState.save();
+                    print(_email);
+                    print(_password);
+                    print(_confirmPassword);
+                  },
                   child: Text(
                     'Register',
                     style: TextStyle(
